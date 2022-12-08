@@ -9,10 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@NamedQuery(name="Operation.findOperationsByNumCompte" , 
+     query="SELECT o FROM Operation o WHERE o.compte.numero = :numCompte")
 public class Operation {
 	
 	@Id
