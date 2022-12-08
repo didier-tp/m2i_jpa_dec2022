@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import tp.appliSpring.entity.Client;
 import tp.appliSpring.entity.Compte;
 import tp.appliSpring.entity.Operation;
 import tp.appliSpring.repository.RepositoryClient;
@@ -28,13 +29,23 @@ class TestRepositoryCompte {
 	
 	@Test
 	void testComptesDeClient() {
-		//Compte compteRelu = repositoryCompte.findById(numCompte);//avec lazy exception
-		List<Compte> comptes = repositoryCompte.findByClientId(2L);
-		System.out.println("comptes du client 2:");
+		
+		Compte compteC1 = repositoryCompte.insertNew(new Compte(null,"compteC1" , 101.0));
+		Compte compteC2 = repositoryCompte.insertNew(new Compte(null,"compteC2" , 202.0));
+		Compte compteC3 = repositoryCompte.insertNew(new Compte(null,"compteC3" , 303.0));
+		
+		Client cliX = new Client(null,"prenomX" , "nomX");
+		cliX.getComptes().add(compteC1);
+		cliX.getComptes().add(compteC2);
+		repositoryClient.insertNew(cliX);
+	
+		
+		List<Compte> comptes = repositoryCompte.findByClientId(cliX.getId());
+		System.out.println("comptes du client X:");
 		for (Compte cpt : comptes) {
 			System.out.println("\t" +cpt);
 		}
-		Assertions.assertTrue(comptes.size()>=1);
+		Assertions.assertTrue(comptes.size()==2);
 	}
 
 	@Test
