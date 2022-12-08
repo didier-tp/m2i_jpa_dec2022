@@ -37,7 +37,8 @@ class TestRepositoryCompte {
 		opB.setCompte(compteQueJaime);
 		repositoryOperation.insertNew(opB);
 		
-		Compte compteRelu = repositoryCompte.findById(numCompte);
+		//Compte compteRelu = repositoryCompte.findById(numCompte);//avec lazy exception
+		Compte compteRelu = repositoryCompte.findWithOperationsById(numCompte);
 		List<Operation> operations = compteRelu.getOperations();
 		for (Operation op : operations) {
 			System.out.println(op);

@@ -8,9 +8,21 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+/*
+ NB: le mot clef FETCH permet de remonter sur demande les operations reliées au compte
+ en un seul gros select (même comportement que EAGER mais sur demande seulement).
+ pas besoin de ON operation.num_compte = compte.numero car ces infos
+ sont déjà précisées via @Id et @JoinColumn dans les classes JAVA
+ et de toute façon requête JPQL exprimée qu'avec des noms java et jamais avec noms de table 
+ ou de colonne.
+ */
+
 @Entity
+@NamedQuery(name="Compte.findWithOperationsById",
+            query="SELECT c FROM Compte c LEFT JOIN FETCH c.operations WHERE c.numero = :numCompte")
 public class Compte {
 	
 	@Id
@@ -23,7 +35,7 @@ public class Compte {
 	
 	//NB: mappedBy="nom_java_relation_inverse"
 	//du coté secondaire d'une relation bidirectionnelle
-	@OneToMany(mappedBy="compte" , fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="compte" , fetch = FetchType.LAZY)
 	private List<Operation> operations = new ArrayList<>() ;  //+get/set
 
 
