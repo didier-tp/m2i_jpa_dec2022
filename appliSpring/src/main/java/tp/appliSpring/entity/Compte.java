@@ -1,5 +1,6 @@
 package tp.appliSpring.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ public class Compte {
 	//NB: mappedBy="nom_java_relation_inverse"
 	//du coté secondaire d'une relation bidirectionnelle
 	@OneToMany(mappedBy="compte" , fetch = FetchType.EAGER)
-	private List<Operation> operations ;  //+get/set
+	private List<Operation> operations = new ArrayList<>() ;  //+get/set
 
 
 

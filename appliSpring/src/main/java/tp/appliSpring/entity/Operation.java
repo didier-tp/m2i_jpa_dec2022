@@ -51,6 +51,15 @@ public class Operation {
 		this.dateOp = dateOp;
 		this.compte = compte;
 	}
+	
+	public Operation(Long numOp, String label, Double montant) {
+		super();
+		this.numOp = numOp;
+		this.label = label;
+		this.montant = montant;
+		this.dateOp = new Date();
+		this.compte = null;
+	}
 
 	@Override
 	public String toString() {
