@@ -1,5 +1,7 @@
 package tp.appliSpring.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -46,5 +48,12 @@ public class RepositoryCompteJpa extends RepositoryGenericJpa<Compte,Long>
 		return entityManager.createNamedQuery("Compte.findWithOperationsById", Compte.class)
 				            .setParameter("numCompte", numCompte)
 				            .getSingleResult();
+	}
+
+	@Override
+	public List<Compte> findByClientId(long idClient) {
+		return entityManager.createNamedQuery("Compte.findByClientId", Compte.class)
+	            .setParameter("idClient", idClient)
+	            .getResultList();
 	}
 }

@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
@@ -23,6 +24,8 @@ import javax.persistence.OneToMany;
 @Entity
 @NamedQuery(name="Compte.findWithOperationsById",
             query="SELECT c FROM Compte c LEFT JOIN FETCH c.operations WHERE c.numero = :numCompte")
+@NamedQuery(name="Compte.findByClientId",
+            query="SELECT cpt FROM Client cli LEFT JOIN  cli.comptes cpt WHERE cli.id = :idClient")
 public class Compte {
 	
 	@Id
@@ -37,6 +40,9 @@ public class Compte {
 	//du coté secondaire d'une relation bidirectionnelle
 	@OneToMany(mappedBy="compte" , fetch = FetchType.LAZY)
 	private List<Operation> operations = new ArrayList<>() ;  //+get/set
+	
+	@ManyToMany(mappedBy="comptes" , fetch = FetchType.LAZY)
+	private List<Client> clients = new ArrayList<>() ;  //+get/set
 
 
 
@@ -95,6 +101,18 @@ public List<Operation> getOperations() {
 
 public void setOperations(List<Operation> operations) {
 	this.operations = operations;
+}
+
+
+
+public List<Client> getClients() {
+	return clients;
+}
+
+
+
+public void setClients(List<Client> clients) {
+	this.clients = clients;
 }
 
 

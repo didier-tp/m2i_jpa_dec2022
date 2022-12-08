@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import tp.appliSpring.entity.Compte;
 import tp.appliSpring.entity.Operation;
+import tp.appliSpring.repository.RepositoryClient;
 import tp.appliSpring.repository.RepositoryCompte;
 import tp.appliSpring.repository.RepositoryOperation;
 
@@ -21,6 +22,20 @@ class TestRepositoryCompte {
 	
 	@Autowired //equivalent de @Inject	
 	private RepositoryOperation repositoryOperation;
+	
+	@Autowired //equivalent de @Inject	
+	private RepositoryClient repositoryClient;
+	
+	@Test
+	void testComptesDeClient() {
+		//Compte compteRelu = repositoryCompte.findById(numCompte);//avec lazy exception
+		List<Compte> comptes = repositoryCompte.findByClientId(2L);
+		System.out.println("comptes du client 2:");
+		for (Compte cpt : comptes) {
+			System.out.println("\t" +cpt);
+		}
+		Assertions.assertTrue(comptes.size()>=1);
+	}
 
 	@Test
 	void testOperationsDeCompte() {
