@@ -2,6 +2,7 @@ package tp.appliSpring.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Operation {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="num_op")
 	private Long  numOp;
 	
 	private String label; //ex: "achat bonbon" ou "paye du mois"
@@ -23,6 +25,7 @@ public class Operation {
 	private Double montant; //ex: -5.5 ou +2000
 	
 	@Temporal(TemporalType.DATE)
+	@Column(name="date_op")
 	private Date dateOp; //ex: 2022-12-08 yyyy-MM-dd
 
     //+lien @ManyToOne de Operation vers compte
