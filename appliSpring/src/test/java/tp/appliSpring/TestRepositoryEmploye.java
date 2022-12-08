@@ -26,6 +26,11 @@ class TestRepositoryEmploye {
 			System.out.println(emp);
 		}
 		Assertions.assertTrue(employes.size()>=1);
+		
+		Employe e = repositoryEmploye.findEmployeByEmail("jean.Bon@xyz.com");
+		Assertions.assertNotNull(e);
+		Assertions.assertEquals("jean.Bon@xyz.com",e.getEmail());
+		System.out.println("employe avec email=jean.Bon@xyz.com : " + e.toString());
 	}
 
 }

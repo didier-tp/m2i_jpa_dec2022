@@ -30,4 +30,14 @@ public class RepositoryEmployeJpa extends RepositoryGenericJpa<Employe,Long>
 		super(Employe.class);
 	}
 
+
+
+	@Override
+	public Employe findEmployeByEmail(String email) {
+		return entityManager.createNamedQuery("Employe.findEmployeByEmail",Employe.class)
+				            .setParameter("email", email)
+				            .setMaxResults(1) //pour compenser (en TP simplifié) pas vérification email unique lors de l'insertion
+				            .getSingleResult();
+	}
+
 }

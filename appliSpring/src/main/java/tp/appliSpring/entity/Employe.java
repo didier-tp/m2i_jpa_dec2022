@@ -5,10 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.NamedQuery;
 
 @Entity
 //@Table(name="employe")
+@NamedQuery(name = "Employe.findEmployeByEmail" ,
+            query = "SELECT e FROM Employe e WHERE e.email = :email")
 public class Employe {
 	
 	@Id //identifiant (clef primaire / pk)

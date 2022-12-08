@@ -64,4 +64,10 @@ public class RepositoryEmployeJpaSansSpring implements RepositoryEmploye {
 		entityManager.getTransaction().commit(); // à peaufiner via try/catch
 	}
 
+	@Override
+	public Employe findEmployeByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
