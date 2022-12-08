@@ -25,7 +25,9 @@ import javax.persistence.OneToMany;
 @NamedQuery(name="Compte.findWithOperationsById",
             query="SELECT c FROM Compte c LEFT JOIN FETCH c.operations WHERE c.numero = :numCompte")
 @NamedQuery(name="Compte.findByClientId",
-            query="SELECT cpt FROM Client cli LEFT JOIN  cli.comptes cpt WHERE cli.id = :idClient")
+    query="SELECT cpt FROM Client cli LEFT JOIN  cli.comptes cpt WHERE cli.id = :idClient")
+//Dans la requête JPQL ci dessus cpt est un alias pour une instance appartenant
+//à la collection cli.comptes
 public class Compte {
 	
 	@Id
