@@ -6,6 +6,8 @@ DROP TABLE IF EXISTS operation;
 DROP TABLE IF EXISTS client_compte;
 DROP TABLE IF EXISTS compte;
 DROP TABLE IF EXISTS client;
+DROP TABLE IF EXISTS resa_avec_version;
+DROP TABLE IF EXISTS big_data;
 
 CREATE TABLE employe(
 emp_id INTEGER auto_increment,
@@ -70,10 +72,27 @@ INSERT INTO client (id,prenom,nom) VALUES (2,'jean', 'Aimare');
 
 INSERT INTO client_compte (id_client,num_compte) VALUES (1,1); 
 INSERT INTO client_compte (id_client,num_compte) VALUES (2,1);
-INSERT INTO client_compte (id_client,num_compte) VALUES (2,2);      
+INSERT INTO client_compte (id_client,num_compte) VALUES (2,2);  
 
+CREATE TABLE resa_avec_version(
+id_resa INTEGER auto_increment,
+num_version INTEGER,
+objet  VARCHAR(64),
+num_client INTEGER,
+PRIMARY KEY(id_resa));
+
+INSERT INTO resa_avec_version (id_resa,num_version,objet,num_client) 
+  VALUES (1,1,"uniqueVoitureDeCourtoisie" , null); 
+  
+CREATE TABLE big_data (
+   id bigint not null auto_increment, 
+   image longblob, 
+   json_data longtext, 
+   primary key (id));  
+   
 SELECT * FROM employe;
 SELECT * FROM compte;
 SELECT * FROM operation;
 SELECT * FROM client;
 SELECT * FROM client_compte;
+SELECT * FROM resa_avec_version;
