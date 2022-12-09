@@ -3,6 +3,7 @@ package tp.appliSpring.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -23,6 +24,7 @@ public class AdresseClient {
 	private String ville;
 	
 	@OneToOne(optional=false)
+	//@OneToOne(optional=true)
 	@PrimaryKeyJoinColumn
 	private Client client;
 	
@@ -30,6 +32,12 @@ public class AdresseClient {
 
 	public AdresseClient() {
 		super();
+	}
+	public AdresseClient(String rue, String codePostal, String ville) {
+		super();
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
 	}
 
 	public AdresseClient(String rue, String codePostal, String ville, Client client) {

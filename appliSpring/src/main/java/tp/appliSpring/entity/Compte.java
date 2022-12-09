@@ -3,11 +3,17 @@ package tp.appliSpring.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -22,6 +28,10 @@ import javax.persistence.OneToMany;
  */
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type_compte", 
+ discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("CompteCourant")
 @NamedQuery(name="Compte.findWithOperationsById",
             query="SELECT c FROM Compte c LEFT JOIN FETCH c.operations WHERE c.numero = :numCompte")
 @NamedQuery(name="Compte.findByClientId",
@@ -40,8 +50,15 @@ public class Compte {
 	
 	//NB: mappedBy="nom_java_relation_inverse"
 	//du coté secondaire d'une relation bidirectionnelle
-	@OneToMany(mappedBy="compte" , fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="compte" , fetch = FetchType.LAZY , cascade = {CascadeType.PERSIST })
 	private List<Operation> operations = new ArrayList<>() ;  //+get/set
+	
+	public void addOperation(Operation op) {
+		this.operations.add(op);
+		op.setCompte(this); //met à jour la relation bidirectionnelle dans les 2 sens
+		//c'est immédiatement cohérent en mémoire , et le coté principal (pas secondaire) 
+		//sera sauvegardé en base
+	}
 	
 	@ManyToMany(mappedBy="comptes" , fetch = FetchType.LAZY)
 	private List<Client> clients = new ArrayList<>() ;  //+get/set
