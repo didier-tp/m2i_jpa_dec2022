@@ -13,6 +13,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter  @Setter  @NoArgsConstructor /* @ToString déconseillé sur @Entity */
 @Entity
 @NamedQuery(name="Operation.findOperationsByNumCompte" , 
      query="SELECT o FROM Operation o WHERE o.compte.numero = :numCompte")
@@ -39,10 +44,7 @@ public class Operation {
 	
 	
 
-	public Operation() {
-		super();
-	}
-
+	
 	public Operation(Long numOp, String label, Double montant, Date dateOp, Compte compte) {
 		super();
 		this.numOp = numOp;
@@ -67,45 +69,7 @@ public class Operation {
 				+ ", compte=" + compte + "]";
 	}
 
-	public Long getNumOp() {
-		return numOp;
-	}
-
-	public void setNumOp(Long numOp) {
-		this.numOp = numOp;
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public Double getMontant() {
-		return montant;
-	}
-
-	public void setMontant(Double montant) {
-		this.montant = montant;
-	}
-
-	public Date getDateOp() {
-		return dateOp;
-	}
-
-	public void setDateOp(Date dateOp) {
-		this.dateOp = dateOp;
-	}
-
-	public Compte getCompte() {
-		return compte;
-	}
-
-	public void setCompte(Compte compte) {
-		this.compte = compte;
-	}
+	
 	
 	
 }

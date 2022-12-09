@@ -26,6 +26,7 @@ public class AdresseClient {
 	@OneToOne(optional=false)
 	//@OneToOne(optional=true)
 	@PrimaryKeyJoinColumn
+	@MapsId
 	private Client client;
 	
 	

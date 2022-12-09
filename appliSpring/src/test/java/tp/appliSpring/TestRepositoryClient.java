@@ -35,20 +35,7 @@ class TestRepositoryClient {
 		
 	}
 	
-	
-	@Test
-	void testClientAvecAdresseAvecCascade() {
-		
-		Client cliXy = new Client(null,"prenomXy" , "nomXy");
-		repositoryClient.insertNew(cliXy);
-		cliXy.setAdresse(new AdresseClient("rue xy","76000","Rouen"));
-		repositoryClient.update(cliXy);
-		
-		Client client = repositoryClient.findById(cliXy.getId());
-		System.out.println("client=" + client);
-		System.out.println("adresse du client=" + client.getAdresse());
-		
-	}
+
 
 	
 
