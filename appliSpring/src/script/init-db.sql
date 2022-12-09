@@ -24,6 +24,8 @@ CREATE TABLE compte(
 numero INTEGER auto_increment,
 label  VARCHAR(64),
 solde DOUBLE,
+type_compte VARCHAR(64),
+taux DOUBLE,
 PRIMARY KEY(numero));
 
 CREATE TABLE operation(
@@ -60,8 +62,8 @@ VALUES (1,'alain', 'Therieur' , '0102030405' , 'alain.therieur@xyz.com','login1'
 INSERT INTO employe (emp_id,firstname,lastname,phone_number,email,login,password)
 VALUES (2,'axelle', 'Aire' , '0102030405' , 'axelle.aire@m2i.com','login2','pwd2');
 
-INSERT INTO compte (numero,label,solde) VALUES (1,'compteA', 50.0);
-INSERT INTO compte (numero,label,solde) VALUES (2,'compteB', 70.0);
+INSERT INTO compte (numero,label,solde,type_compte,taux) VALUES (1,'compteA', 50.0,'CompteCourant',null);
+INSERT INTO compte (numero,label,solde,type_compte,taux) VALUES (2,'compteB', 70.0,'CompteEpargne',1.2);
 
 INSERT INTO operation (num_op,label,montant,date_op,num_compte) 
    VALUES (1,'achat bonbons', -5.2 , '2022-12-08' , 1);

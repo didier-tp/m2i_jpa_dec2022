@@ -3,6 +3,7 @@ package tp.appliSpring.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,9 +31,10 @@ public class Client {
 	 inverseJoinColumns = {@JoinColumn(name = "num_compte")})
 	private List<Compte> comptes ;
 	
-	@OneToOne(mappedBy = "client" , optional = true)
+	@OneToOne(mappedBy = "client" , optional = true , cascade = { CascadeType.PERSIST , CascadeType.MERGE })
 	private AdresseClient adresse; //+get/set
 	
+		
 	public Client() {
 		this(null,null,null,new ArrayList<>());
 	}
@@ -93,6 +95,8 @@ public class Client {
 
 	public void setAdresse(AdresseClient adresse) {
 		this.adresse = adresse;
+		adresse.setClient(this);
+		adresse.setIdClient(this.getId());
 	}
 	
 

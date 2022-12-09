@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import tp.appliSpring.entity.Client;
 import tp.appliSpring.entity.Compte;
+import tp.appliSpring.entity.CompteEpargne;
 import tp.appliSpring.entity.Operation;
 import tp.appliSpring.repository.RepositoryClient;
 import tp.appliSpring.repository.RepositoryCompte;
@@ -31,7 +32,8 @@ class TestRepositoryCompte {
 	void testComptesDeClient() {
 		
 		Compte compteC1 = repositoryCompte.insertNew(new Compte(null,"compteC1" , 101.0));
-		Compte compteC2 = repositoryCompte.insertNew(new Compte(null,"compteC2" , 202.0));
+		//Compte compteC2 = repositoryCompte.insertNew(new Compte(null,"compteC2" , 202.0));
+		Compte compteC2 = repositoryCompte.insertNew(new CompteEpargne(null,"compteEpargneC2" , 202.0,1.5));
 		Compte compteC3 = repositoryCompte.insertNew(new Compte(null,"compteC3" , 303.0));
 		
 		Client cliX = new Client(null,"prenomX" , "nomX");
@@ -62,6 +64,28 @@ class TestRepositoryCompte {
 		Operation opB= new Operation(null,"achat_b",-6.0);
 		opB.setCompte(compteQueJaime);
 		repositoryOperation.insertNew(opB);
+		
+		//Compte compteRelu = repositoryCompte.findById(numCompte);//avec lazy exception
+		Compte compteRelu = repositoryCompte.findWithOperationsById(numCompte);
+		List<Operation> operations = compteRelu.getOperations();
+		for (Operation op : operations) {
+			System.out.println(op);
+		}
+		Assertions.assertTrue(operations.size()>=1);
+	}
+	
+	@Test
+	void testOperationsDeCompteAvecCascade() {
+		Compte compteQueJaime = new Compte(null,"compteFavori" , 999999.99);
+
+		Operation opA = new Operation(null,"achat_a",-5.0); 
+		 compteQueJaime.addOperation(opA);
+		 
+		Operation opB= new Operation(null,"achat_b",-6.0);
+		 compteQueJaime.addOperation(opB);
+		
+		repositoryCompte.insertNew(compteQueJaime);
+		Long numCompte = compteQueJaime.getNumero();
 		
 		//Compte compteRelu = repositoryCompte.findById(numCompte);//avec lazy exception
 		Compte compteRelu = repositoryCompte.findWithOperationsById(numCompte);
