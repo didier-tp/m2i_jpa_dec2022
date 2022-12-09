@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 //@Table(name="client")
@@ -28,6 +29,9 @@ public class Client {
 	 joinColumns = {@JoinColumn(name = "id_client")},
 	 inverseJoinColumns = {@JoinColumn(name = "num_compte")})
 	private List<Compte> comptes ;
+	
+	@OneToOne(mappedBy = "client" , optional = true)
+	private AdresseClient adresse; //+get/set
 	
 	public Client() {
 		this(null,null,null,new ArrayList<>());
@@ -83,6 +87,13 @@ public class Client {
 		this.comptes = comptes;
 	}
 
+	public AdresseClient getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(AdresseClient adresse) {
+		this.adresse = adresse;
+	}
 	
 
 }

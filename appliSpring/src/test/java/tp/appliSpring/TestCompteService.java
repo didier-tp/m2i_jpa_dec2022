@@ -45,6 +45,27 @@ class TestCompteService {
 		Assertions.assertEquals(compteC1.getSolde() - 50, compteC1ReluApresVirement.getSolde());
 		Assertions.assertEquals(compteC2.getSolde() + 50, compteC2ReluApresVirement.getSolde());
 	}
+	
+	@Test
+	void testMauvaisVirement() {
+		Compte compteC1 = repositoryCompte.insertNew(new Compte(null,"compteC1" , 101.0));
+		Compte compteC2 = repositoryCompte.insertNew(new Compte(null,"compteC2" , 202.0));
+		System.out.println("avant mauvais virement: solde c1="+compteC1.getSolde());
+		System.out.println("avant mauvais virement: solde c2="+compteC2.getSolde());
+		try {
+			//erreur volontaire sur numero de compte à créditer (valeur négative)
+			compteService.effectuerVirement(50.0, compteC1.getNumero(), -compteC2.getNumero());
+		} catch (RuntimeException e) {
+			//e.printStackTrace();
+			//exception normale
+		}
+		Compte compteC1ReluApresVirement = repositoryCompte.findById(compteC1.getNumero());
+		Compte compteC2ReluApresVirement = repositoryCompte.findById(compteC2.getNumero());
+		System.out.println("apres mauvais virement: solde c1="+compteC1ReluApresVirement.getSolde());
+		System.out.println("apres mauvais virement: solde c2="+compteC2ReluApresVirement.getSolde());
+		Assertions.assertEquals(compteC1.getSolde() , compteC1ReluApresVirement.getSolde());
+		Assertions.assertEquals(compteC2.getSolde() , compteC2ReluApresVirement.getSolde());
+	}
 
 	
 }
