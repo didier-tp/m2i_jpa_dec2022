@@ -19,7 +19,7 @@ public class AdresseClient {
 	@OneToOne(optional=false)
 	@MapsId//@MapsId is better than @PrimaryKeyJoinColumn
 	@JoinColumn(name = "id_client")
-	private Client client;
+	private ClientAvecAdresse client;
 	
 	private String numero;//ex: 2 ou "2bis"
 	private String rue;
@@ -83,11 +83,11 @@ public class AdresseClient {
 		this.ville = ville;
 	}
 
-	public Client getClient() {
+	public ClientAvecAdresse getClient() {
 		return client;
 	}
 
-	public void setClient(Client client) {
+	public void setClient(ClientAvecAdresse client) {
 		this.client = client;
 	}
 	
