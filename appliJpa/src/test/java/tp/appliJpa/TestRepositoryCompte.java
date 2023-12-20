@@ -36,10 +36,17 @@ class TestRepositoryCompte {
 		Compte compteC2 = repositoryCompte.insertNew(new CompteEpargne(null,"compteEpargneC2" , 202.0,1.5));
 		Compte compteC3 = repositoryCompte.insertNew(new Compte(null,"compteC3" , 303.0));
 		
+		addOperationInDatabase(compteC1,new Operation(null,"achat c1o1",-4.6));
+		addOperationInDatabase(compteC1,new Operation(null,"achat c1o2",-1.7));
+		addOperationInDatabase(compteC2,new Operation(null,"achat c2o1",-2.6));
+	
+		
 		Client cliX = new Client(null,"prenomX" , "nomX");
 		cliX.getComptes().add(compteC1);
 		cliX.getComptes().add(compteC2);
 		repositoryClient.insertNew(cliX);
+		
+		
 	
 		
 		List<Compte> comptes = repositoryCompte.findByClientId(cliX.getId());
@@ -48,6 +55,32 @@ class TestRepositoryCompte {
 			System.out.println("\t" +cpt);
 		}
 		Assertions.assertTrue(comptes.size()==2);
+		
+		/*
+		//via RepositoryClient.clientAvecComptes et entityGraph:
+		Client clientAvecComptes = repositoryClient.clientAvecComptes(cliX.getId());
+		System.out.println("via RepositoryClient.clientAvecComptes() ,clientAvecComptes= "+clientAvecComptes);
+		*/
+	
+		//via RepositoryClient.clientAvecComptes et entityGraph:
+		Client clientAvecComptesEtOperations = repositoryClient.clientAvecComptesEtOperations(cliX.getId());
+		System.out.println("via RepositoryClient.clientAvecComptesEtOperations() ,clientAvecComptesEtOperations= "+clientAvecComptesEtOperations);
+		Client clientAvecComptes = clientAvecComptesEtOperations;
+		
+		System.out.println("comptes de ce client:");
+		for (Compte cpt : clientAvecComptes.getComptes()) {
+			System.out.println("\t" +cpt);
+			for (Operation op : cpt.getOperations()) {
+				System.out.println("\t\t" +op);
+			}
+		}
+		Assertions.assertTrue(clientAvecComptes.getComptes().size()==2);
+		
+	}
+	
+	private void addOperationInDatabase(Compte cpt,Operation op) {
+		op.setCompte(cpt);
+		repositoryOperation.insertNew(op);
 	}
 
 	@Test

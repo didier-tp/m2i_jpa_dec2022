@@ -8432,9 +8432,9 @@
 										"$ref": "AAAAAAGMggr9U2zH/XY="
 									},
 									"font": "Arial;13;0",
-									"left": 88,
+									"left": 87,
 									"top": 1026,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -8651,7 +8651,7 @@
 											"top": 471,
 											"width": 88.84814453125,
 											"height": 13,
-											"text": "AbstractClient"
+											"text": "BasicClient"
 										},
 										{
 											"_type": "LabelView",
@@ -10371,7 +10371,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGMggYRZ0f0CWY="
 							},
-							"name": "numero"
+							"name": "numero",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -10379,7 +10380,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGMggYRZ0f0CWY="
 							},
-							"name": "rue"
+							"name": "rue",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -10387,7 +10389,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGMggYRZ0f0CWY="
 							},
-							"name": "codePostal"
+							"name": "codePostal",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -10395,7 +10398,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGMggYRZ0f0CWY="
 							},
-							"name": "ville"
+							"name": "ville",
+							"type": ""
 						}
 					]
 				},
@@ -10429,7 +10433,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGMggfHTVjdms0="
 							},
-							"name": "taux"
+							"name": "taux",
+							"type": ""
 						}
 					]
 				},
@@ -10449,6 +10454,7 @@
 								"$ref": "AAAAAAGMggqrL2q5vvQ="
 							},
 							"name": "numero",
+							"type": "",
 							"isID": true
 						},
 						{
@@ -10457,7 +10463,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGMggqrL2q5vvQ="
 							},
-							"name": "date"
+							"name": "date",
+							"type": ""
 						}
 					]
 				},
@@ -10509,7 +10516,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGMggrG3GuFVXE="
 							},
-							"name": "numLigne"
+							"name": "numLigne",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -10517,7 +10525,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGMggrG3GuFVXE="
 							},
-							"name": "refProduit"
+							"name": "refProduit",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -10525,7 +10534,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGMggrG3GuFVXE="
 							},
-							"name": "quantité"
+							"name": "quantité",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -10533,7 +10543,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGMggrG3GuFVXE="
 							},
-							"name": "prixUnitaire"
+							"name": "prixUnitaire",
+							"type": ""
 						}
 					]
 				},
@@ -10543,7 +10554,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "AbstractClient",
+					"name": "BasicClient",
 					"attributes": [
 						{
 							"_type": "UMLAttribute",

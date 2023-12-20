@@ -5,12 +5,14 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="client")
-public class ClientAvecAdresse extends AbstractClient{
+public class ClientAvecAdresse extends BasicClient{
 
 	@OneToOne(optional=true,
 			  mappedBy="client",

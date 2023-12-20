@@ -8,11 +8,31 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.Table;
 
 @Entity
+@NamedEntityGraph(name = "entity-graph-client-comptes",
+	attributeNodes = {
+		    @NamedAttributeNode(value="comptes")
+		  }
+	)
+@NamedEntityGraph(name = "entity-graph-client-comptes-operations",
+	attributeNodes = {
+	    @NamedAttributeNode(value="comptes" , subgraph = "compte-subgraph")
+	  },
+	subgraphs = {
+		@NamedSubgraph( name = "compte-subgraph",
+			    	      attributeNodes = {
+			    	        @NamedAttributeNode("operations")
+			    	      }
+			    	  )
+	}
+)
 @Table(name="client")
-public class Client extends AbstractClient{
+public class Client extends BasicClient{
 	
 	@ManyToMany( fetch = FetchType.LAZY)
 	 @JoinTable(name = "client_compte",

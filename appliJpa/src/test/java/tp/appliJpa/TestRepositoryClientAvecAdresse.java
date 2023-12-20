@@ -41,6 +41,20 @@ class TestRepositoryClientAvecAdresse {
 		AdresseClient adr = c.getAdresse(); 
 		Assertions.assertEquals("rue X1",adr.getRue());
 		System.out.println("adresse du client: " + adr.toString());
+		
+		
+	}
+	
+	@Test
+	void testGetBasicClientWithoutAddress() {
+        ClientAvecAdresse cliX2 = new ClientAvecAdresse(null,"prenomX2" , "nomX2");
+		
+		cliX2.setAdresse(new AdresseClient("42 bis","rue X2" , "80000" , "Amiens"));
+		//NB: IMPORTANT .setAdresse() automatically call this.adresse.setClient(this) 
+		repositoryClientAvecAdresse.insertNew(cliX2);
+		Long idCx2 = cliX2.getId();
+		Assertions.assertNotNull(idCx2);
+		System.out.println("BasicClient sans adresse " + repositoryClientAvecAdresse.getBasicClientWithoutAddress(idCx2));
 	}
 
 }

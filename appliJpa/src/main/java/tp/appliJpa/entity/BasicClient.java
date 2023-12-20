@@ -1,14 +1,27 @@
 package tp.appliJpa.entity;
 
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.SqlResultSetMapping;
 
+
+@SqlResultSetMapping(
+        name = "BasicClientMapping",
+        classes = @ConstructorResult(
+                targetClass = BasicClient.class,
+                columns = {
+                    @ColumnResult(name = "id", type = Long.class),
+                    @ColumnResult(name = "nom"),
+                    @ColumnResult(name = "prenom")}))
 //NO @Entity , No @Table here but only in subclasses 
 //(Client avec liste de comptes, ClientAvecAdresse)
 @MappedSuperclass //NB: @MappedSuperclass is important, abstract may be omitted
-public abstract class AbstractClient {
+//public abstract class AbstractClient {
+public class BasicClient {	
 	
 	@Id //identifiant (clef primaire / pk)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//auto_incr qui remonte en mémoire 
@@ -18,12 +31,12 @@ public abstract class AbstractClient {
 	private String nom;
 	
 
-	public AbstractClient() {
+	public BasicClient() {
 		this(null,null,null);
 	}
 	
 
-	public AbstractClient(Long id, String prenom, String nom) {
+	public BasicClient(Long id, String prenom, String nom) {
 		super();
 		this.id = id;
 		this.prenom = prenom;

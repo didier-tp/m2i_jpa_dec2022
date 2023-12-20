@@ -2,6 +2,7 @@ package tp.appliJpa.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
@@ -28,6 +31,13 @@ import javax.persistence.OneToMany;
  */
 
 @Entity
+/*
+@NamedEntityGraph(name = "entity-graph-compte-operations",
+attributeNodes = {
+	    @NamedAttributeNode("operations")
+	  }
+)
+*/
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type_compte", 
  discriminatorType = DiscriminatorType.STRING)
@@ -79,6 +89,30 @@ public Compte(Long numero, String label, Double solde) {
 	this.label = label;
 	this.solde = solde;
 }
+
+
+
+@Override
+public int hashCode() {
+	return Objects.hash(label, numero, solde);
+}
+
+
+
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	Compte other = (Compte) obj;
+	return Objects.equals(label, other.label) && Objects.equals(numero, other.numero)
+			&& Objects.equals(solde, other.solde);
+}
+
+
 
 public Long getNumero() {
 	return numero;
