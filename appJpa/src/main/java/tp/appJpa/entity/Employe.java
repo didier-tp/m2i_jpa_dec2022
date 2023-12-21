@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @NamedQuery(name = "Employe.findByFirstname" , query = "SELECT e FROM Employe e WHERE e.firstname = ?1")
-@Getter @Setter @NoArgsConstructor @ToString
+@Getter @Setter @NoArgsConstructor
 public class Employe {
 
     @Column(name="emp_id") @Id
@@ -25,5 +25,14 @@ public class Employe {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+    }
+
+    @Override
+    public String toString() {
+        return "Employe{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                '}';
     }
 }
