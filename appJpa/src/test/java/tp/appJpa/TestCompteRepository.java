@@ -3,10 +3,7 @@ package tp.appJpa;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import tp.appJpa.entity.Client;
-import tp.appJpa.entity.Compte;
-import tp.appJpa.entity.Employe;
-import tp.appJpa.entity.Operation;
+import tp.appJpa.entity.*;
 import tp.appJpa.repository.*;
 
 import java.util.List;
@@ -35,7 +32,7 @@ class TestCompteRepository {
 		cc1.getClients().add(cli1);  //JoinTable coté compte
 		repositoryCompte.insertNew(cc1);
 
-		Compte cc2 = new Compte(null,"comptecB",70.0);
+		Compte cc2 = new CompteEpargne(null,"comptecB",70.0 , 2.5);
 		cc2.getClients().add(cli1);  //JoinTable coté compte
 		repositoryCompte.insertNew(cc2);
 
@@ -43,13 +40,13 @@ class TestCompteRepository {
 		Client cli1Relu=repositoryClient.findByIdWithComptes(cli1.getId());
 		System.out.println("cli1Relu"+cli1Relu);
 		for(Compte c : cli1Relu.getComptes()){
-			System.out.println("\t" + c);
+			System.out.println("\t" + c.toString());
 		}
 
 		//Solution2:
 		System.out.println("via repositoryCompte.findByClientId(idClient):");
 		for(Compte c : repositoryCompte.findByClientId(cli1.getId())){
-			System.out.println("\t" + c);
+			System.out.println("\t" + c.toString());
 		}
 
 

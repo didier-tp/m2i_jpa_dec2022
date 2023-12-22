@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE )
+@DiscriminatorColumn(name = "type_compte" , discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("CompteCourant")
 @Getter @Setter @NoArgsConstructor
 @NamedQuery(name = "Compte.findWithOperations", query = "SELECT c FROM Compte c INNER JOIN FETCH c.operations WHERE c.numero = ?1")
 @NamedQuery(name = "Compte.findByClientId", query = "SELECT c FROM Compte c INNER JOIN FETCH c.clients cli WHERE cli.id = ?1")
