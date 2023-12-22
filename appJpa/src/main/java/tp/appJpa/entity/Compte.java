@@ -11,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
+@NamedQuery(name = "Compte.findWithOperations", query = "SELECT c FROM Compte c INNER JOIN FETCH c.operations WHERE c.numero = ?1")
 public class Compte {
 
     @Id
@@ -21,7 +22,7 @@ public class Compte {
 
     private Double solde;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "compte")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "compte")
     private List<Operation> operations = new ArrayList<>();
 
     public Compte(Long numero, String label, Double solde) {

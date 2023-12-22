@@ -34,7 +34,7 @@ public abstract class RepositoryGenericJpa<E,ID> implements RepositoryGeneric<E,
 
     @Override
     public E insertNew(E e) {
-        //en entrée , emp est un nouvel objet employé avec .empId à null (encore inconnu)
+        //en entrée , emp est un nouvel objet E avec .empId à null (encore inconnu)
         //déclenche automatiquement INSERT INTO Employe(firstname, ....) VALUES(emp.getFirstname() , ....)
         getEntityManager().persist(e);// .empId n'est normalement plus null si auto-incr
         return e; // on retourne l'objet modifié (avec .empId non null)

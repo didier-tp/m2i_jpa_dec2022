@@ -29,4 +29,10 @@ public class RepositoryCompteJpa extends RepositoryGenericJpa<Compte,Long>
         return this.entityManager;
     }
 
+    @Override
+    public Compte findWithOperations(long numCompte) {
+        return entityManager.createNamedQuery("Compte.findWithOperations" , Compte.class)
+                .setParameter(1,numCompte)
+                .getSingleResult();
+    }
 }
