@@ -12,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
+@NamedQuery(name = "Operation.findByCompteNumero" , query = "SELECT o FROM Operation o WHERE o.compte.numero = ?1")
 public class Operation {
 
     @Id

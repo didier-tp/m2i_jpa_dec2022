@@ -46,6 +46,11 @@ class TestCompteRepository {
 		for(Operation op : c1Relu.getOperations()){
 			System.out.println("\t op="+op);
 		}
+
+		System.out.println("via query sur Operation:");
+		for(Operation op : repositoryOperation.findByCompteNumero(c1.getNumero())){
+			System.out.println("\t op="+op);
+		}
 	}
 
 }
