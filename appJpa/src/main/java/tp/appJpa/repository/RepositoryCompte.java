@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface RepositoryCompte extends RepositoryGeneric<Compte,Long> {
     Compte findWithOperations(long numCompte);
+    List<Compte> findByClientId(long idClient);
 
 }

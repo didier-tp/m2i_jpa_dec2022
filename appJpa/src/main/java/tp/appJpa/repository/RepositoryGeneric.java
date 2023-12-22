@@ -1,5 +1,7 @@
 package tp.appJpa.repository;
 
+import tp.appJpa.entity.Client;
+
 import java.util.List;
 
 public interface RepositoryGeneric<E,ID> {
@@ -13,4 +15,5 @@ public interface RepositoryGeneric<E,ID> {
     E update(E e);
 
     void deleteById(ID id);
+
 }

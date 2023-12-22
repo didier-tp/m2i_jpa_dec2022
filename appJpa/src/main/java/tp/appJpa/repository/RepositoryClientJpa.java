@@ -3,25 +3,24 @@ package tp.appJpa.repository;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import tp.appJpa.entity.Client;
 import tp.appJpa.entity.Compte;
-import tp.appJpa.entity.Employe;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 
 @Repository //@Component Spring de type Repository/DAO
 @Transactional //pour que Spring déclenche automatiquement les commit/rollback
-public class RepositoryCompteJpa extends RepositoryGenericJpa<Compte,Long>
-            implements RepositoryCompte {
+public class RepositoryClientJpa extends RepositoryGenericJpa<Client,Long>
+            implements RepositoryClient {
 
     @PersistenceContext()  //pour initialiser le entityManager à partir de la configuration
     //du projet (META-INF/persistence.xml ou bien application.properties ou .yml )
     //ou bien @PersistenceContext(unitName = "appJpa")
     private EntityManager entityManager;
 
-    public RepositoryCompteJpa() {
-        super(Compte.class);
+    public RepositoryClientJpa() {
+        super(Client.class);
     }
 
     @Override
@@ -30,16 +29,9 @@ public class RepositoryCompteJpa extends RepositoryGenericJpa<Compte,Long>
     }
 
     @Override
-    public Compte findWithOperations(long numCompte) {
-        return entityManager.createNamedQuery("Compte.findWithOperations" , Compte.class)
-                .setParameter(1,numCompte)
+    public Client findByIdWithComptes(Long id) {
+        return entityManager.createNamedQuery("Client.findByIdWithComptes" , Client.class)
+                .setParameter(1,id)
                 .getSingleResult();
-    }
-
-    @Override
-    public List<Compte> findByClientId(long idClient) {
-        return entityManager.createNamedQuery("Compte.findByClientId" , Compte.class)
-                .setParameter(1,idClient)
-                .getResultList();
     }
 }

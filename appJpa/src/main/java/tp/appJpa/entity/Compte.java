@@ -12,6 +12,7 @@ import java.util.List;
 @Entity
 @Getter @Setter @NoArgsConstructor
 @NamedQuery(name = "Compte.findWithOperations", query = "SELECT c FROM Compte c INNER JOIN FETCH c.operations WHERE c.numero = ?1")
+@NamedQuery(name = "Compte.findByClientId", query = "SELECT c FROM Compte c INNER JOIN FETCH c.clients cli WHERE cli.id = ?1")
 public class Compte {
 
     @Id
@@ -24,6 +25,12 @@ public class Compte {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "compte")
     private List<Operation> operations = new ArrayList<>();
+
+    @ManyToMany()
+    @JoinTable(name = "client_compte",
+            joinColumns = {@JoinColumn(name = "num_compte")},
+            inverseJoinColumns = {@JoinColumn(name = "id_client")})
+    private List<Client> clients = new ArrayList<>();
 
     public Compte(Long numero, String label, Double solde) {
         this.numero = numero;
